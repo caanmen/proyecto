@@ -1,0 +1,94 @@
+.item-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.item-header, .item {
+    display: grid;
+    grid-template-columns: 1fr 2fr 2fr 2fr 3fr 2fr 2fr 1.5fr;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.item-header {
+    font-weight: bold;
+    background-color: #f0f0f0;
+}
+
+.item span, .item-header span {
+    padding: 5px;
+    text-align: center;
+}
+
+.item-acciones, .header-acciones {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+button {
+    padding: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background: none;
+}
+
+.edit-button {
+    color: #007bff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit-button:hover {
+    color: #0056b3;
+}
+
+.delete-button {
+    color: #dc3545;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-button:hover {
+    color: #c82333;
+}
+
+button:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.item-list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.message {
+    font-size: 18px;  /* Tamaño de la letra */
+    margin: 10px 0;  /* Margen para separar el mensaje del contenido */
+}
+
+.error-message {
+    color: #dc3545;  /* Color rojo para los mensajes de error */
+    font-weight: bold;
+}
+
+.success-message {
+    color: green;  /* Color verde para los mensajes de éxito */
+    font-weight: bold;
+}
