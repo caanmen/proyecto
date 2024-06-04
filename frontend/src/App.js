@@ -4,12 +4,16 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LoginComponent from './components/login/LoginComponent';
 import RegisterComponent from './components/register/RegisterComponent';
 import ItemListContainer from './components/reserva/ItemListContainer';
+import AuditTable from './components/auditoria/AuditTable';
+
 import './App.css';
 
 function App() {
     return (
         <Router>
             <Routes>
+                <Route path="/" element={<ItemListContainer />} />
+                <Route path="/auditoria" element={<AuditTable />} />
                 <Route path="/" element={<LoginComponent />} />
                 <Route path="/items" element={<ItemListContainer />} />
                 <Route path="/register" element={<RegisterComponent />} />
@@ -17,6 +21,7 @@ function App() {
             </Routes>
         </Router>
     );
+    
 }
 
 export default App;

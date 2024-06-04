@@ -1,0 +1,19 @@
+/* frontend/src/components/auditoria/AuditTable.css */
+.audit-table-container {
+    padding: 20px;
+}
+
+.audit-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.audit-table th, .audit-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.audit-table th {
+    background-color: #f2f2f2;
+    text-align: left;
+}
