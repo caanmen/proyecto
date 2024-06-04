@@ -109,13 +109,9 @@ def login():
         )
         user = cursor.fetchone()
         if user:
-            if user['tipo_usuario'] == 'administrador':
-                additional_claims = {"tipo_usuario": user['tipo_usuario']}
-                response = ResponseFactory.create_response('success', 'Login exitoso', {'user': user['correo'], 'tipo_usuario': additional_claims})
-                return _corsify_actual_response(response)
-            else:
-                response = ResponseFactory.create_response('error', 'Acceso denegado. Solo los administradores pueden acceder.')
-                return _corsify_actual_response(response)
+            additional_claims = {"tipo_usuario": user['tipo_usuario']}
+            response = ResponseFactory.create_response('success', 'Login exitoso', {'user': user['correo'], 'tipo_usuario': additional_claims})
+            return _corsify_actual_response(response)
         else:
             response = ResponseFactory.create_response('error', 'Credenciales inválidas')
             return _corsify_actual_response(response)
