@@ -13,7 +13,7 @@ const ItemListContainer = () => {
     const [messageType, setMessageType] = useState('');  // Estado para manejar el tipo de mensaje
     const [users, setUsers] = useState([]);  // Estado para manejar la lista de usuarios
     const [mesas, setMesas] = useState([]);  // Estado para manejar la lista de mesas
-    const [currentUser, setCurrentUser] = useState(null);  // Estado para manejar el usuario actual
+    const [userType, setUserType] = useState(localStorage.getItem('userType'));  // Estado para manejar el tipo de usuario
 
     const navigate = useNavigate();
 
@@ -47,9 +47,6 @@ const ItemListContainer = () => {
             .then(data => {
                 if (data.status === 'success') {
                     setUsers(data.data);
-                    // Supongamos que el usuario actual se obtiene de alguna manera, por ejemplo, un login anterior
-                    const user = data.data.find(user => user.correo === 'correo_super_administrador@ejemplo.com');
-                    setCurrentUser(user);
                 } else {
                     console.error('Error fetching users:', data.message);
                 }
@@ -197,7 +194,7 @@ const ItemListContainer = () => {
                     {message}
                 </div>
             )}  {/* Mostrar mensaje de éxito o error */}
-            {currentUser && currentUser.tipo_usuario === 'super_administrador' && (
+            {userType === 'super_administrador' && (
                 <button className="audit-button" onClick={handleAuditButtonClick}>
                     Ver Tabla de Auditoría
                 </button>
