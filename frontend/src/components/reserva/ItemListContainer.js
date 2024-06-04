@@ -3,6 +3,7 @@ import ItemList from './ItemList';
 import EditItemForm from './EditItemForm';
 import Filter from './Filter';
 import './EditItemForm.css';  // Importar el archivo CSS para el formulario de edición
+import { useNavigate } from 'react-router-dom';
 
 const ItemListContainer = () => {
     const [items, setItems] = useState([]);
@@ -12,6 +13,9 @@ const ItemListContainer = () => {
     const [messageType, setMessageType] = useState('');  // Estado para manejar el tipo de mensaje
     const [users, setUsers] = useState([]);  // Estado para manejar la lista de usuarios
     const [mesas, setMesas] = useState([]);  // Estado para manejar la lista de mesas
+    const [currentUser, setCurrentUser] = useState(null);  // Estado para manejar el usuario actual
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch('http://localhost:3100/reservas')
@@ -43,6 +47,9 @@ const ItemListContainer = () => {
             .then(data => {
                 if (data.status === 'success') {
                     setUsers(data.data);
+                    // Supongamos que el usuario actual se obtiene de alguna manera, por ejemplo, un login anterior
+                    const user = data.data.find(user => user.correo === 'correo_super_administrador@ejemplo.com');
+                    setCurrentUser(user);
                 } else {
                     console.error('Error fetching users:', data.message);
                 }
@@ -178,6 +185,10 @@ const ItemListContainer = () => {
         setFilteredItems(filtered);
     };
 
+    const handleAuditButtonClick = () => {
+        navigate('/auditoria');
+    };
+
     return (
         <div className="item-list-container">
             <h1>Item List</h1>
@@ -186,6 +197,11 @@ const ItemListContainer = () => {
                     {message}
                 </div>
             )}  {/* Mostrar mensaje de éxito o error */}
+            {currentUser && currentUser.tipo_usuario === 'super_administrador' && (
+                <button className="audit-button" onClick={handleAuditButtonClick}>
+                    Ver Tabla de Auditoría
+                </button>
+            )}
             <button className="floating-button" onClick={() => setEditingItem({})}>+</button>
             <Filter onFilter={handleFilter} users={users} mesas={mesas} />
             {editingItem ? (
