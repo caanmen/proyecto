@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import ItemList from './ItemList';
 import EditItemForm from './EditItemForm';
 import Filter from './Filter';
+import './ItemListContainer.css';
+
 import './EditItemForm.css';  // Importar el archivo CSS para el formulario de edición
 import { useNavigate } from 'react-router-dom';
 
