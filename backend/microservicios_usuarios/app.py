@@ -21,7 +21,7 @@ class DatabaseConnection:
             self.connection = psycopg2.connect(
                 dbname="rest",
                 user="postgres",
-                password="adm",
+                password="admin",
                 host="localhost"
             )
         return self.connection
@@ -109,9 +109,13 @@ def login():
         )
         user = cursor.fetchone()
         if user:
-            additional_claims = {"tipo_usuario": user['tipo_usuario']}
-            response = ResponseFactory.create_response('success', 'Login exitoso', {'user': user['correo'], 'tipo_usuario': additional_claims})
-            return _corsify_actual_response(response)
+            if user['tipo_usuario'] == 'administrador':
+                additional_claims = {"tipo_usuario": user['tipo_usuario']}
+                response = ResponseFactory.create_response('success', 'Login exitoso', {'user': user['correo'], 'tipo_usuario': additional_claims})
+                return _corsify_actual_response(response)
+            else:
+                response = ResponseFactory.create_response('error', 'Acceso denegado. Solo los administradores pueden acceder.')
+                return _corsify_actual_response(response)
         else:
             response = ResponseFactory.create_response('error', 'Credenciales inválidas')
             return _corsify_actual_response(response)
@@ -123,6 +127,7 @@ def login():
             cursor.close()
         if conn:
             conn.close()
+
 
 @app.route('/users', methods=['GET', 'OPTIONS'])
 def get_users():

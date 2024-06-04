@@ -171,8 +171,8 @@ const ItemListContainer = () => {
             const matchHora = filters.hora ? item.hora === filters.hora : true;
             const matchEstado = filters.estado ? item.estado === filters.estado : true;
             const matchDetalle = filters.detalle ? item.detalle.includes(filters.detalle) : true;
-            const matchUsuario = filters.usuario_responsable ? item.usuario_responsable == filters.usuario_responsable : true;
-            const matchMesa = filters.numero_mesa ? item.numero_mesa == filters.numero_mesa : true;
+            const matchUsuario = filters.usuario_responsable ? item.usuario_responsable === filters.usuario_responsable : true;
+            const matchMesa = filters.numero_mesa ? item.numero_mesa === filters.numero_mesa : true;
             return matchFecha && matchHora && matchEstado && matchDetalle && matchUsuario && matchMesa;
         });
         setFilteredItems(filtered);

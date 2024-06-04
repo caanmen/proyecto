@@ -21,7 +21,7 @@ class DatabaseConnection:
             self.connection = psycopg2.connect(
                 dbname="rest",
                 user="postgres",
-                password="adm",
+                password="admin",
                 host="localhost"
             )
         return self.connection
